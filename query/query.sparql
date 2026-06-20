@@ -1,0 +1,31 @@
+# This query finds all usages of property P7717 as a statement,
+# including place of birth and place of death.
+#
+# Important note: most SPARQL users don't need such level of complication!
+# If you want to get only concrete values with best rank, replace body with something like:
+# ?item wdt:P7717 ?value.
+SELECT ?item ?itemLabel ?statement ?rank ?snaktype ?value 
+       ?placeOfBirth ?placeOfBirthLabel 
+       ?placeOfDeath ?placeOfDeathLabel
+       ?dateOfDeath  ?dateOfBirth
+{
+  ?item p:P7717 ?statement .
+  ?statement wikibase:rank ?rank .
+  OPTIONAL { ?statement ps:P7717 ?dbvalue }
+  BIND(COALESCE(IF(wikibase:isSomeValue(?dbvalue), "unknown", "concrete"), "novalue") AS ?snaktype)
+  BIND(IF(wikibase:isSomeValue(?dbvalue), "", ?dbvalue) AS ?value)
+  
+  # Place of birth (P19)
+  OPTIONAL { ?item wdt:P19 ?placeOfBirth }
+  
+  # Place of death (P20)
+  OPTIONAL { ?item wdt:P20 ?placeOfDeath }
+  
+  # Date of death (P570)
+  OPTIONAL { ?item wdt:P570 ?dateOfDeath }
+  
+  # Date of birth (P569)
+  OPTIONAL { ?item wdt:P569 ?dateOfBirth }
+  
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en" }
+}
