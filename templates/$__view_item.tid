@@ -1,0 +1,12 @@
+created: 20260620170926759
+modified: 20260620171408017
+tags: $:/tags/ViewTemplate
+title: $:/view/item
+
+<$list filter="[is[current]tag[WikidataItem]]">
+
+! {{!!itemlabel}}
+
+Født <$text text={{{ [{!!dateofbirth}format:date[DD. MMM YYYY]] }}}/>. Død <$text text={{{ [{!!dateofdeath}format:date[DD. MMM YYYY]] }}}/>.
+
+</$list>

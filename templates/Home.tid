@@ -1,0 +1,20 @@
+created: 20260620165857910
+modified: 20260620171602869
+tags: 
+title: Home
+
+<$list filter="[get[dateofdeath]unique[]sort[]]" variable="selecteddate">
+
+!! <$text text={{{ [<selecteddate>format:date[DDD DD. MMM YYYY]] }}}/>
+
+<table>
+<tr><th>Name</th><th>Date of birth</th><th>Place of birth</th></tr>
+<$list filter="[dateofdeath<selecteddate>]">
+<tr>
+<td><$link>{{!!itemlabel}}</$link></td>
+<td><$text text={{{ [{!!dateofbirth}format:date[DD. MMM YYYY]] }}}/></td>
+<td>{{!!placeofbirthlabel}}</td>
+</tr>
+</$list>
+</table>
+</$list>
