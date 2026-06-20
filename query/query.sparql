@@ -21,8 +21,9 @@ SELECT ?item ?itemLabel ?statement ?rank ?snaktype ?value
   # Place of death (P20)
   OPTIONAL { ?item wdt:P20 ?placeOfDeath }
   
-  # Date of death (P570)
-  OPTIONAL { ?item wdt:P570 ?dateOfDeath }
+  # Date of death (P570) - required and filtered to the campaign period
+  ?item wdt:P570 ?dateOfDeath .
+  FILTER(?dateOfDeath >= "1940-04-09"^^xsd:dateTime && ?dateOfDeath <= "1940-06-10"^^xsd:dateTime)
   
   # Date of birth (P569)
   OPTIONAL { ?item wdt:P569 ?dateOfBirth }
