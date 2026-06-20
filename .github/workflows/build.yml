@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: andjar/wikitiddler@v1   # replace OWNER with this repo's owner
+      - uses: andjar/wikitiddler@main   # replace OWNER with this repo's owner
         id: wiki
       - uses: actions/upload-pages-artifact@v3
         with:
